@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My To-Do List</title>
+</head>
+<body>
+    <h1>My To-Do List</h1>
+
+    <form action="/add" method="POST">
+        <input type="text" name="item" placeholder="Item" required>
+        <input type="text" name="class_org" placeholder="Class/Organization">
+        <input type="date" name="due_date">
+        <input type="date" name="do_date">
+        <input type="text" name="difficulty" placeholder="Difficulty">
+        <input type="text" name="length" placeholder="Length">
+        <input type="text" name="comments" placeholder="Comments">
+        <button type="submit">Add Task</button>
+    </form>
+
+    <hr>
+
+    <table border="1">
+        <tr>
+            <th>Item</th>
+            <th>Class/Org</th>
+            <th>Due Date</th>
+            <th>Do Date</th>
+            <th>Difficulty</th>
+            <th>Length</th>
+            <th>Comments</th>
+            <th>Actions</th>
+        </tr>
+        {% for task in tasks %}
+        <tr>
+            <td>{{ task.item }}</td>
+            <td>{{ task.class_org }}</td>
+            <td>{{ task.due_date }}</td>
+            <td>{{ task.do_date }}</td>
+            <td>{{ task.difficulty }}</td>
+            <td>{{ task.length }}</td>
+            <td>{{ task.comments }}</td>
+            <td>
+                <a href="/edit/{{ task.id }}">Edit</a>
+                <a href="/delete/{{ task.id }}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

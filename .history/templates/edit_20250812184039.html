@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Task</title>
+</head>
+<body>
+    <h1>Edit Task</h1>
+
+    <form method="POST">
+        <input type="text" name="item" value="{{ task.item }}" required>
+        <input type="text" name="class_org" value="{{ task.class_org }}">
+        <input type="date" name="due_date" value="{{ task.due_date }}">
+        <input type="date" name="do_date" value="{{ task.do_date }}">
+        <input type="text" name="difficulty" value="{{ task.difficulty }}">
+        <input type="text" name="length" value="{{ task.length }}">
+        <input type="text" name="comments" value="{{ task.comments }}">
+        <button type="submit">Update</button>
+    </form>
+</body>
+</html>

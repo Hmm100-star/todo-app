@@ -1,12 +1,18 @@
+import os
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from flask_migrate import Migrate
+
+# NEW: use DATABASE_URL when provided (Render), else local sqlite file
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///tasks.db")
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tasks.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 # Database model
 class Task(db.Model):
@@ -77,6 +83,5 @@ def short_date(date_str):
         return date_str
 
 if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
+    # No db.create_all() here — migrations handle schema changes
     app.run(debug=True, host="0.0.0.0", port=5001)
